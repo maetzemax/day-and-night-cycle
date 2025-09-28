@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://4im48rtj4jfq"]
 
-[ext_resource type="Script" uid="uid://sqer1ykwxtg5" path="res://addons/day_and_night_cycle/scripts/day_and_night_cycle.gd" id="1_o34ws"]
+[ext_resource type="Script" uid="uid://sqer1ykwxtg5" path="res://addons/day_and_night_cycle/scripts/cycle_controller.gd" id="1_o34ws"]
 [ext_resource type="Resource" uid="uid://b0mbm2nb4pntn" path="res://addons/day_and_night_cycle/presets/default_night_cycle.tres" id="2_pssa7"]
 [ext_resource type="Resource" uid="uid://kr0ipoip375a" path="res://addons/day_and_night_cycle/presets/default_day_cycle.tres" id="3_7w8s4"]
 
@@ -27,7 +27,7 @@ size = Vector3(1, 2, 1)
 
 [node name="EXAMPLE" type="Node3D"]
 
-[node name="DayAndNightCycle" type="Node3D" parent="." node_paths=PackedStringArray("sun_light", "world_environment")]
+[node name="CycleController" type="Node3D" parent="." node_paths=PackedStringArray("sun_light", "world_environment")]
 script = ExtResource("1_o34ws")
 day_data = ExtResource("3_7w8s4")
 night_data = ExtResource("2_pssa7")
@@ -35,10 +35,10 @@ sun_light = NodePath("DirectionalLight3D")
 world_environment = NodePath("WorldEnvironment")
 metadata/_custom_type_script = "uid://sqer1ykwxtg5"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="DayAndNightCycle"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CycleController"]
 environment = SubResource("Environment_ucs8h")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DayAndNightCycle"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CycleController"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 

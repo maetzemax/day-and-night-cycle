@@ -1,4 +1,4 @@
-class_name DayAndNightCycle
+class_name CycleController
 extends Node3D
 
 
