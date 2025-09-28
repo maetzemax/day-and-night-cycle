@@ -14,7 +14,6 @@ sky_material = SubResource("ProceduralSkyMaterial_pssa7")
 [sub_resource type="Environment" id="Environment_ucs8h"]
 background_mode = 2
 sky = SubResource("Sky_7w8s4")
-tonemap_mode = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pssa7"]
 size = Vector2(1000, 1000)
@@ -28,21 +27,20 @@ size = Vector3(1, 2, 1)
 
 [node name="EXAMPLE" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ucs8h")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
 [node name="DayAndNightCycle" type="Node3D" parent="." node_paths=PackedStringArray("sun_light", "world_environment")]
 script = ExtResource("1_o34ws")
 day_data = ExtResource("3_7w8s4")
 night_data = ExtResource("2_pssa7")
-sun_light = NodePath("../DirectionalLight3D")
-world_environment = NodePath("../WorldEnvironment")
-show_debug_time = true
+sun_light = NodePath("DirectionalLight3D")
+world_environment = NodePath("WorldEnvironment")
 metadata/_custom_type_script = "uid://sqer1ykwxtg5"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DayAndNightCycle"]
+environment = SubResource("Environment_ucs8h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DayAndNightCycle"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.64456344, 0.0790249, -0.76045585, 0, 0.9946439, 0.10336121, 0.76455086, -0.06662286, 0.6411111, -9.609212, 3.6144786, 2.1959615)
