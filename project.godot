@@ -10,6 +10,10 @@ config_version=5
 
 [application]
 
-config/name="day and night cycle"
+config/name="DayAndNightCycle"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/day_and_night_cycle/plugin.cfg")
