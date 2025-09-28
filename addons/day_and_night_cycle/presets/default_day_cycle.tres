@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CycleData" load_steps=5 format=3 uid="uid://kr0ipoip375a"]
+
+[ext_resource type="Script" uid="uid://kolqah11th63" path="res://addons/day_and_night_cycle/scripts/cycle_data.gd" id="1_b2ovo"]
+
+[sub_resource type="Gradient" id="Gradient_u4ray"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
+colors = PackedColorArray(0.8374334, 0.48671246, 0.4633525, 1, 0.4159305, 0.715203, 0.89938086, 1, 0.71939, 0.8673739, 0.9660892, 1, 0.41568628, 0.7137255, 0.8980392, 1, 0.8392157, 0.40784314, 0.4627451, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d15nv"]
+gradient = SubResource("Gradient_u4ray")
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_u4ray"]
+_data = [Vector2(0, 0.4982751), 0.0, 0.0, 0, 0, Vector2(0.49746194, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.503881), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_b2ovo")
+colors = SubResource("GradientTexture2D_d15nv")
+length = 60.0
+light_energy = SubResource("Curve_u4ray")
+metadata/_custom_type_script = "uid://kolqah11th63"
