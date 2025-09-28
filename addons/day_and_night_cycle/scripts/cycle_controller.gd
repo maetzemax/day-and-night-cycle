@@ -90,6 +90,7 @@ func _process(delta):
 		_print_debug_info()
 
 
+## Formated time string (hh:mm:ss) since entering the tree.
 func get_current_time_formatted() -> String:
 	var hours = int(_current_time / 3600.0)
 	var minutes = int(fmod(_current_time, 3600.0) / 60.0)
@@ -97,15 +98,22 @@ func get_current_time_formatted() -> String:
 	return "%02d:%02d:%02d" % [hours, minutes, seconds]
 
 
-func get_day_progress() -> float:
+## Normalized progress [0.0, 1.0] of the whole cycle (day + night).
+func get_cycle_progress() -> float:
+	return (_current_time / _cycle_time)
+
+
+## Normalized progress [0.0, 1.0] of current phase (day OR night).
+func get_phase_progress() -> float:
 	if _is_day:
 		return _current_time / day_data.length
 	else:
 		return (_current_time - day_data.length) / night_data.length
 
 
-## 0.0 = Start of the day; 1.0 = End of cycle
-func set_time_of_day(progress: float):
+## Jump to any state of the cycle.
+## @param progress Value from 0.0 (Start) to 1.0 (End) of the cylces progress.
+func set_cycle_progress(progress: float):
 	_current_time = progress * _cycle_time
 	_current_time = clamp(_current_time, 0.0, _cycle_time)
 
@@ -125,9 +133,9 @@ func skip_to_night():
 
 
 func _print_debug_info():
-	var cycle_progress = (_current_time / _cycle_time) * 100
+	var cycle_progress = get_cycle_progress() * 100
 	var phase = "Day" if _is_day else "Night"
-	var phase_progress = get_day_progress() * 100
+	var phase_progress = get_phase_progress() * 100
 	
 	print("Time: %s | Cycle: %.1f%% | Phase: %s (%.1f%%)" % [
 		get_current_time_formatted(),
