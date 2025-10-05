@@ -27,12 +27,12 @@ size = Vector3(1, 2, 1)
 
 [node name="EXAMPLE" type="Node3D"]
 
-[node name="CycleController" type="Node3D" parent="." node_paths=PackedStringArray("sun_light", "world_environment")]
+[node name="CycleController" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "sun_light")]
 script = ExtResource("1_o34ws")
 day_data = ExtResource("3_7w8s4")
 night_data = ExtResource("2_pssa7")
-sun_light = NodePath("DirectionalLight3D")
 world_environment = NodePath("WorldEnvironment")
+sun_light = NodePath("DirectionalLight3D")
 metadata/_custom_type_script = "uid://sqer1ykwxtg5"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CycleController"]

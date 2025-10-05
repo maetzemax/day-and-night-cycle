@@ -1,7 +1,6 @@
 class_name CycleController
 extends Node3D
 
-
 signal day_started
 signal night_started
 
@@ -11,8 +10,14 @@ signal night_started
 @export var night_data: CycleData
 
 @export_group("General")
-@export var sun_light: DirectionalLight3D
 @export var world_environment: WorldEnvironment
+
+@export_group("Lighting")
+@export var sun_light: DirectionalLight3D
+@export var ambient_light_color: Color
+## Percentage of light used from the sky. If your sky is red and you set this value to 1.0
+## there'll be a red ambient light in the world.
+@export_range(0, 1, 0.01) var sky_contribution: float = 0.1
 
 @export_group("Debug")
 @export var show_debug_time: bool = false
@@ -25,6 +30,9 @@ var _is_day: bool = true
 
 func _ready():
 	_cycle_time = day_data.length + night_data.length
+	world_environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	world_environment.environment.ambient_light_color = ambient_light_color
+	world_environment.environment.ambient_light_sky_contribution = sky_contribution
 
 
 func _process(delta):
@@ -57,7 +65,7 @@ func _process(delta):
 	progress = clamp(progress, 0.0, 1.0)
 	
 	var day_light_energy = day_data.light_energy.sample(progress)
-	var night_light_energy = night_data.light_energy.sample(progress)	
+	var night_light_energy = night_data.light_energy.sample(progress)
 	
 	sun_light.light_energy = day_light_energy if _is_day else night_light_energy
 	
@@ -111,8 +119,7 @@ func get_phase_progress() -> float:
 		return (_current_time - day_data.length) / night_data.length
 
 
-## Jump to any state of the cycle.
-## @param progress Value from 0.0 (Start) to 1.0 (End) of the cylces progress.
+## Jump to any state of the cycle. Progress Value from 0.0 (Start) to 1.0 (End) of the cylces progress.
 func set_cycle_progress(progress: float):
 	_current_time = progress * _cycle_time
 	_current_time = clamp(_current_time, 0.0, _cycle_time)
