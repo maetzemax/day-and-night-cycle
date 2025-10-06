@@ -15,3 +15,11 @@ class_name CycleData
 
 ## Image layer abover the sky color
 @export var sky_cover: Texture2D
+
+@export_group("Sky Color Variations")
+## Multiplier for horizon darkening
+@export var horizon_darkening_multiplier: float = 0.1
+## Multiplier for ground horizon darkening
+@export var ground_horizon_darkening_multiplier: float = 0.2
+## Multiplier for ground bottom darkening
+@export var ground_bottom_darkening_multiplier: float = 0.4
