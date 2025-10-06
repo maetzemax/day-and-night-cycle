@@ -79,9 +79,12 @@ func _process(delta):
 		var sky_material = world_environment.environment.sky.sky_material
 		if sky_material:
 			sky_material.sky_top_color = sky_color
-			sky_material.sky_horizon_color = sky_color
-			sky_material.ground_bottom_color = sky_color
-			sky_material.ground_horizon_color = sky_color
+			# Apply curve-based color variations
+			var current_data = day_data if _is_day else night_data
+			
+			sky_material.sky_horizon_color = sky_color.darkened(current_data.horizon_darkening_multiplier)
+			sky_material.ground_horizon_color = sky_color.darkened(current_data.ground_horizon_darkening_multiplier)
+			sky_material.ground_bottom_color = sky_color.darkened(current_data.ground_bottom_darkening_multiplier)
 			
 			if _is_day and day_data.sky_cover:
 				sky_material.sky_cover = day_data.sky_cover
