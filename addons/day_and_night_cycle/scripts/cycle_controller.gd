@@ -82,6 +82,16 @@ func _process(delta):
 			sky_material.sky_horizon_color = sky_color
 			sky_material.ground_bottom_color = sky_color
 			sky_material.ground_horizon_color = sky_color
+			
+			if _is_day and day_data.sky_cover:
+				sky_material.sky_cover = day_data.sky_cover
+				var day_alpha = 1.0 - smoothstep(0.8, 1.0, progress)
+				sky_material.sky_cover_modulate = Color(1, 1, 1, day_alpha)
+			elif not _is_day and night_data.sky_cover:
+				sky_material.sky_cover = night_data.sky_cover
+				var night_alpha = 1.0 - abs(progress - 0.5) * 2.0
+				night_alpha = smoothstep(0.0, 0.3, progress) * smoothstep(1.0, 0.7, progress)
+				sky_material.sky_cover_modulate = Color(1, 1, 1, night_alpha)
 	else:
 		push_warning("Could not find sky material. Please assign WorldEnvironment accrodingly. Need Help? Look for 'Setup' in the README file.")
 	

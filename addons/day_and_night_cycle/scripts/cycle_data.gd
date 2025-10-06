@@ -12,3 +12,6 @@ class_name CycleData
 
 ## Control the sun lights enegry during the day.
 @export var light_energy: Curve
+
+## Image layer abover the sky color
+@export var sky_cover: Texture2D
