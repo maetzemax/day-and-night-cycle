@@ -1,29 +1,38 @@
 # Day & Night Cycle (Godot plugin)
 
-Adds an easy-to-use, customizable day & night cycle for Godot 4 projects.
+Lightweight day/night cycle system for Godot 4 with smooth transitions and configurable atmosphere.
 
 ## Features
-- Smooth day/night transitions using gradients and curves
-- Separate presets for day and night phases
-- Controls DirectionalLight3D and WorldEnvironment sky material
-- Signals for phase changes (day_started, night_started)
+- Smooth color transitions with gradient curves
+- Sky cover textures with automatic blending
+- Configurable sky darkening (horizon, ground)
+- Ambient lighting control
+- Separate day/night presets
 
 ## Preview
 
-![Sunset example](images/sunset_example.png)
+![Preview](images/preview.gif)
 
-## Essentials
-- Install: copy `addons/day_and_night_cycle` into your project's `addons/` folder and enable the plugin in Project Settings -> Plugins.
-- Quick start: instance `res://addons/day_and_night_cycle/scenes/example.tscn` or add a `CycleController` node and set `day_data`, `night_data`, `sun_light`, and `world_environment` in the inspector.
+## Setup
+1. Copy `addons/day_and_night_cycle` to your project
+2. Enable plugin in Project Settings
+3. Add `CycleController` to scene or use `res://addons/day_and_night_cycle/scenes/example.tscn`
 
-## Configuration (short)
-- `CycleData` (resource): `colors` (GradientTexture2D), `length` (seconds), `light_energy` (Curve).
-- `CycleController` (node): assign `day_data`, `night_data`, `sun_light` (DirectionalLight3D) and `world_environment` (WorldEnvironment with a ProceduralSkyMaterial).
+## Configuration
+**CycleData** (day/night presets):
+- `colors`: Sky gradient over time
+- `length`: Phase duration (seconds)  
+- `light_energy`: Sun intensity curve
+- `sky_cover`: Optional cloud/atmosphere texture
+- `sky_darkening_curve`: Controls horizon/ground darkness
 
-## Example & presets
-- Example scene: `addons/day_and_night_cycle/scenes/example.tscn`.
-- Presets: `addons/day_and_night_cycle/presets/default_day_cycle.tres`, `addons/day_and_night_cycle/presets/default_night_cycle.tres`.
+**CycleController** (main node):
+- `day_data`/`night_data`: Assign preset resources
+- `world_environment`: WorldEnvironment with ProceduralSkyMaterial
+- `sun_light`: DirectionalLight3D for sun
+- `ambient_light_color`/`sky_contribution`: Ambient lighting
 
 ## Troubleshooting
-- If sky colors don't update, ensure the `WorldEnvironment.environment.sky.sky_material` is a `ProceduralSkyMaterial`.
-- Make sure `sun_light` (DirectionalLight3D) is assigned to the controller.
+- Requires `ProceduralSkyMaterial` in WorldEnvironment
+- Assign `sun_light` (DirectionalLight3D) to controller
+- Check example scenes for proper setup

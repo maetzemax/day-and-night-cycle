@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://4im48rtj4jfq"]
+
+[ext_resource type="Script" uid="uid://sqer1ykwxtg5" path="res://addons/day_and_night_cycle/scripts/cycle_controller.gd" id="1_o34ws"]
+[ext_resource type="Resource" uid="uid://b0mbm2nb4pntn" path="res://addons/day_and_night_cycle/presets/default/default_night_cycle.tres" id="2_pssa7"]
+[ext_resource type="Resource" uid="uid://kr0ipoip375a" path="res://addons/day_and_night_cycle/presets/default/default_day_cycle.tres" id="3_7w8s4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pssa7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7w8s4"]
+sky_material = SubResource("ProceduralSkyMaterial_pssa7")
+
+[sub_resource type="Environment" id="Environment_ucs8h"]
+background_mode = 2
+sky = SubResource("Sky_7w8s4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pssa7"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pssa7"]
+albedo_color = Color(0.19899327, 0.38351798, 0.19821581, 1)
+metallic_specular = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_pssa7"]
+size = Vector3(1, 2, 1)
+
+[node name="EXAMPLE" type="Node3D"]
+
+[node name="CycleController" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "sun_light")]
+script = ExtResource("1_o34ws")
+day_data = ExtResource("3_7w8s4")
+night_data = ExtResource("2_pssa7")
+world_environment = NodePath("WorldEnvironment")
+sun_light = NodePath("DirectionalLight3D")
+metadata/_custom_type_script = "uid://sqer1ykwxtg5"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CycleController"]
+environment = SubResource("Environment_ucs8h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CycleController"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.64456344, 0.0790249, -0.76045585, 0, 0.9946439, 0.10336121, 0.76455086, -0.06662286, 0.6411111, -9.609212, 3.6144786, 2.1959615)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Environment"]
+mesh = SubResource("PlaneMesh_pssa7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pssa7")
+
+[node name="Cube" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_pssa7")
