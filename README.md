@@ -17,7 +17,7 @@ Adds an easy-to-use, customizable day & night cycle for Godot 4 projects.
 - Quick start: instance `res://addons/day_and_night_cycle/scenes/example.tscn` or add a `CycleController` node and set `day_data`, `night_data`, `sun_light`, and `world_environment` in the inspector.
 
 ## Configuration (short)
-- `CycleData` (resource): `colors` (GradientTexture2D), `length` (seconds), `light_energy` (Curve).
+- `CycleData` (resource): `colors` (GradientTexture2D), `length` (seconds), `light_energy` (Curve), `sky_cover` (Texture2D).
 - `CycleController` (node): assign `day_data`, `night_data`, `world_environment` (WorldEnvironment with a ProceduralSkyMaterial) and `sun_light` (DirectionalLight3D).
 
 ## Example & presets

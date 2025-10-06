@@ -12,6 +12,7 @@ config_version=5
 
 config/name="DayAndNightCycle"
 config/tags=PackedStringArray("addon")
+run/main_scene="uid://4im48rtj4jfq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
