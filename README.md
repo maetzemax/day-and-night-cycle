@@ -24,7 +24,7 @@ Lightweight day/night cycle system for Godot 4 with smooth transitions and confi
 - `length`: Phase duration (seconds)  
 - `light_energy`: Sun intensity curve
 - `sky_cover`: Optional cloud/atmosphere texture
-- `sky_darkening_curve`: Controls horizon/ground darkness
+- `Sky Color Variations`: Controls horizon/ground darkness
 
 **CycleController** (main node):
 - `day_data`/`night_data`: Assign preset resources
